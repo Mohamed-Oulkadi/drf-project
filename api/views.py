@@ -8,7 +8,7 @@ from rest_framework.decorators import api_view
 from rest_framework.views import APIView
 from employees.models import Employee
 from django.http import Http404
-from rest_framework import mixins, generics
+from rest_framework import mixins, generics, viewsets
 
 
 @api_view(['GET', 'POST'])
@@ -113,7 +113,7 @@ class EmployeeDetail(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.
     def delete(self, request, pk):
         return self.destroy(request, pk)
     """
-
+"""
 #generics api view
 class Employees(generics.ListAPIView, generics.CreateAPIView):
     queryset = Employee.objects.all()
@@ -123,3 +123,9 @@ class EmployeeDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Employee.objects.all()
     serializer_class = EmployeeSerializer
     lookup_field = 'pk'
+
+"""
+
+class EmployeeViewSet(viewsets.ModelViewSet):
+    queryset = Employee.objects.all()
+    serializer_class = EmployeeSerializer
